@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Hasil dokumen — GuruCerdas AI{% endblock %}
+{% block content %}
+<div class="result-top">
+  <a class="backlink" href="{{ url_for('index') }}">← Kembali ke formulir</a>
+  <span class="status-pill">{{ "Dibantu AI" if result.mode == "ai" else "Mode template" }}</span>
+</div>
+<section class="result-header">
+  <div class="eyebrow">DOKUMEN BERHASIL DISIAPKAN</div>
+  <h1>{{ payload.material_label }}</h1>
+  <p>{{ payload.grade }} · {{ payload.subject }} · {{ payload.topic }}</p>
+  <small>Dibuat {{ generated_at }}</small>
+</section>
+<div class="notice">{{ result.notice }}</div>
+<section class="editor-card">
+  <div class="editor-head"><div><h2>Pratinjau dan edit</h2><p>Perbaiki isi sebelum mengunduh atau membagikannya.</p></div><span class="edit-tag">Bisa diedit</span></div>
+  <form method="post" action="{{ url_for('download') }}">
+    <label class="field">Judul file<input name="title" value="{{ payload.material_label }} - {{ payload.subject }} {{ payload.grade }}" required></label>
+    <label class="field content-field">Isi dokumen<textarea name="content" rows="26" required>{{ result.content }}</textarea></label>
+    <button class="primary" type="submit">Unduh sebagai Word (.docx) <span>↓</span></button>
+  </form>
+</section>
+{% endblock %}

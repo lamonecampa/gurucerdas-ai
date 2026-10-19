@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GuruCerdas AI membantu guru menyiapkan soal, kisi-kisi, LKPD, rubrik, dan bahan ajar.">
+  <title>{% block title %}GuruCerdas AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">GC</span><span>GuruCerdas <b>AI</b></span></a>
+  <span class="topnote">Asisten persiapan pembelajaran</span>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="messages">{% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer><p>GuruCerdas AI • Open source • Gratis • Tanpa login • Draf perlu ditinjau guru.</p></footer>
+</body>
+</html>

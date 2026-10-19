@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}GuruCerdas AI — Asisten Guru{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="eyebrow">ASISTEN GURU • OPEN SOURCE • GRATIS</div>
+  <h1>Persiapan mengajar,<br><span>lebih terstruktur.</span></h1>
+  <p>Buat draf soal, kisi-kisi, LKPD, rubrik penilaian, dan bahan ajar berdasarkan kelas serta materi. Gratis, tanpa login, dan dapat digunakan langsung. Hasil tetap perlu diperiksa oleh guru.</p>
+  <div class="hero-pills"><span>✓ Gratis & tanpa login</span><span>✓ Unduh Word</span><span>✓ Open source</span></div>
+</section>
+<section class="workspace">
+  <div class="section-heading"><div><div class="eyebrow">BUAT DOKUMEN</div><h2>Mulai dari kebutuhan kelas</h2></div><span class="step">01 / 02</span></div>
+  <form action="{{ url_for('generate') }}" method="post" class="form-grid">
+    <label class="field wide">Jenis dokumen
+      <select name="material_type" required>{% for key,label in material_types.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}</select>
+    </label>
+    <label class="field">Jenjang / kelas
+      <select name="grade" required>{% for grade in grades %}<option>{{ grade }}</option>{% endfor %}</select>
+    </label>
+    <label class="field">Mata pelajaran
+      <select name="subject" required>{% for subject in subjects %}<option>{{ subject }}</option>{% endfor %}</select>
+    </label>
+    <label class="field">Kurikulum / acuan
+      <select name="curriculum"><option>Kurikulum Merdeka</option><option>Kurikulum 2013</option><option>Umum / disesuaikan sekolah</option></select>
+    </label>
+    <label class="field">Tingkat kesulitan
+      <select name="difficulty"><option>Mudah</option><option selected>Sedang</option><option>Menantang</option></select>
+    </label>
+    <label class="field wide">Topik atau materi <span class="required">*</span>
+      <input name="topic" placeholder="Contoh: pecahan sederhana, kelas 4" required maxlength="180">
+      <small>Topik spesifik menghasilkan draf yang lebih mudah diperiksa.</small>
+    </label>
+    <label class="field wide">Tujuan pembelajaran (opsional)
+      <textarea name="learning_objective" rows="2" placeholder="Contoh: siswa mampu membandingkan dua pecahan berpenyebut sama."></textarea>
+    </label>
+    <label class="field">Jumlah soal / aktivitas
+      <input type="number" name="count" min="1" max="30" value="10">
+      <small>Untuk kisi-kisi dan LKPD, jumlah dibatasi sesuai format.</small>
+    </label>
+    <label class="field wide">Catatan tambahan (opsional)
+      <textarea name="teacher_notes" rows="2" placeholder="Konteks lokal, karakteristik siswa, format sekolah, dan sebagainya."></textarea>
+    </label>
+    <div class="wide form-bottom"><p>Hasil merupakan draf. Guru tetap bertanggung jawab memeriksa kebenaran materi, tingkat kesulitan, dan kesesuaian kurikulum.</p><button type="submit" class="primary">Buat dokumen <span>→</span></button></div>
+  </form>
+</section>
+<section class="feature-grid">
+  <article><span class="feature-icon">01</span><h3>Paket soal</h3><p>Kerangka soal dan bagian kunci/pedoman jawaban.</p></article>
+  <article><span class="feature-icon">02</span><h3>Kisi-kisi</h3><p>Tabel indikator, bentuk soal, nomor, dan level kognitif.</p></article>
+  <article><span class="feature-icon">03</span><h3>LKPD</h3><p>Tujuan, petunjuk, aktivitas, dan ruang refleksi.</p></article>
+  <article><span class="feature-icon">04</span><h3>Rubrik & bahan ajar</h3><p>Kriteria penilaian atau kerangka materi yang bisa dikembangkan.</p></article>
+</section>
+{% endblock %}
